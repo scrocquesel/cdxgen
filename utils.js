@@ -6024,11 +6024,14 @@ export function parseCsPkgLockData(csLockData, pkgLockFile) {
       const dependsOn = [];
       if (libData.dependencies) {
         for (const adep of Object.keys(libData.dependencies)) {
+          // get the resolved version of the dependency
+          assetData.dependencies[aversion][adep]
+
           const adpurl = new PackageURL(
             "nuget",
             "",
             adep,
-            libData.dependencies[adep],
+            assetData.dependencies[aversion][adep].resolved,
             null,
             null
           ).toString();
